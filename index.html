@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style/stylesheet.css" />
+    <link rel="icon" href="/WallOS/favicon.ico" type="image/x-icon">
+
+    <title>
+        WallOS
+    </title>
+</head>
+
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="images"></div>
+
+    <script src="scripts/require.js"></script>
+    <script src="scripts/Main.js"></script>
+    <script>
+        requirejs(['Main'], function(main) {});
+    </script>
+</body>
+
+</html>
