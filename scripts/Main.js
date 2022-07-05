@@ -910,7 +910,7 @@ define("Game/Classes/CryptCoinMinerPanel", ["require", "exports", "Boilerplate/C
     var CryptCoinMinerPanel = /** @class */ (function (_super) {
         __extends(CryptCoinMinerPanel, _super);
         function CryptCoinMinerPanel(images, resources, input) {
-            var _this = _super.call(this, Programs_1.Programs.CryptCoinMiner, "CryptCoin Miner", images.getImage(ImageNames_2.ImageNames.CryptCoinMiner), new Vector2_7.Vector2(400, 0), new Vector2_7.Vector2(480, 400), images) || this;
+            var _this = _super.call(this, Programs_1.Programs.CryptCoinMiner, "加密币矿工", images.getImage(ImageNames_2.ImageNames.CryptCoinMiner), new Vector2_7.Vector2(400, 0), new Vector2_7.Vector2(480, 400), images) || this;
             _this.resources = resources;
             _this.input = input;
             _this.isMining = false;
@@ -921,27 +921,27 @@ define("Game/Classes/CryptCoinMinerPanel", ["require", "exports", "Boilerplate/C
             _this.miningStringChars = "0123456789ABCDEF";
             _this.miningTicks = 50;
             _this.currentMiningTicks = 0;
-            _this.miningButton = new TextButton_1.TextButton("Start mining", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 16), new Vector2_7.Vector2(192, 40)), function () {
+            _this.miningButton = new TextButton_1.TextButton("开始挖矿", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 16), new Vector2_7.Vector2(192, 40)), function () {
                 _this.isMining = !_this.isMining;
-                _this.miningButton.text = _this.isMining ? "Stop mining" : "Start mining";
+                _this.miningButton.text = _this.isMining ? "停止挖矿" : "开始挖矿";
             });
-            _this.algorithmButton = new TextButton_1.TextButton("Improve algorithm", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 128), new Vector2_7.Vector2(240, 40)), function () {
+            _this.algorithmButton = new TextButton_1.TextButton("改进算法", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 128), new Vector2_7.Vector2(240, 40)), function () {
                 _this.resources.money -= _this.algorithmCost();
                 _this.resources.cryptCoinMinerAlgorithmLevel++;
             }, function () { return _this.resources.money >= _this.algorithmCost(); });
-            _this.hashButton = new TextButton_1.TextButton("Hash storage", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 180), new Vector2_7.Vector2(240, 40)), function () {
+            _this.hashButton = new TextButton_1.TextButton("哈希存储", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 180), new Vector2_7.Vector2(240, 40)), function () {
                 _this.resources.money -= _this.hashCost();
                 _this.resources.cryptCoinMinerHashLevel++;
             }, function () { return _this.resources.money >= _this.hashCost(); });
-            _this.cpuButton = new TextButton_1.TextButton("More CPU cores", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 232), new Vector2_7.Vector2(240, 40)), function () {
+            _this.cpuButton = new TextButton_1.TextButton("更多 CPU 内核", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 232), new Vector2_7.Vector2(240, 40)), function () {
                 _this.resources.money -= _this.cpuCost();
                 _this.resources.cryptCoinMinerCpuLevel++;
             }, function () { return _this.resources.money >= _this.cpuCost(); });
-            _this.parallelButton = new TextButton_1.TextButton("Parallelization", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 284), new Vector2_7.Vector2(240, 40)), function () {
+            _this.parallelButton = new TextButton_1.TextButton("并行化", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 284), new Vector2_7.Vector2(240, 40)), function () {
                 _this.resources.money -= _this.parallelCost();
                 _this.resources.cryptCoinMinerParallelLevel++;
             }, function () { return _this.resources.money >= _this.parallelCost(); });
-            _this.seedButton = new TextButton_1.TextButton("Seed prediction", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 336), new Vector2_7.Vector2(240, 40)), function () {
+            _this.seedButton = new TextButton_1.TextButton("种子预测", new Rectangle_3.Rectangle(new Vector2_7.Vector2(16, 336), new Vector2_7.Vector2(240, 40)), function () {
                 _this.resources.money -= _this.seedCost();
                 _this.resources.cryptCoinMinerSeedLevel++;
             }, function () { return _this.resources.money >= _this.seedCost(); });
@@ -991,11 +991,11 @@ define("Game/Classes/CryptCoinMinerPanel", ["require", "exports", "Boilerplate/C
             this.buttons.forEach(function (x) { return x.draw(context, panelRectangle.topLeft()); });
             context.drawString(this.miningString, panelRectangle.topLeft().add(new Vector2_7.Vector2(16, 78)), 32, Fonts_3.Fonts.PixelOperator, this.isMining ? GameColour_3.GameColour.text : GameColour_3.GameColour.textDisabled, Align_4.Align.TopLeft);
             context.drawString("$" + Functions_1.numberWithPostfix(this.moneyPerTick() * GameBase_1.GameBase.updatesPerSecond) + "/s", panelRectangle.topLeft().add(new Vector2_7.Vector2(224, 24)), 32, Fonts_3.Fonts.PixelOperator, GameColour_3.GameColour.text, Align_4.Align.TopLeft);
-            context.drawString("Cost: $" + Functions_1.numberWithPostfix(this.algorithmCost()), panelRectangle.topLeft().add(new Vector2_7.Vector2(272, 136)), 32, Fonts_3.Fonts.PixelOperator, GameColour_3.GameColour.text, Align_4.Align.TopLeft);
-            context.drawString("Cost: $" + Functions_1.numberWithPostfix(this.hashCost()), panelRectangle.topLeft().add(new Vector2_7.Vector2(272, 188)), 32, Fonts_3.Fonts.PixelOperator, GameColour_3.GameColour.text, Align_4.Align.TopLeft);
-            context.drawString("Cost: $" + Functions_1.numberWithPostfix(this.cpuCost()), panelRectangle.topLeft().add(new Vector2_7.Vector2(272, 240)), 32, Fonts_3.Fonts.PixelOperator, GameColour_3.GameColour.text, Align_4.Align.TopLeft);
-            context.drawString("Cost: $" + Functions_1.numberWithPostfix(this.parallelCost()), panelRectangle.topLeft().add(new Vector2_7.Vector2(272, 292)), 32, Fonts_3.Fonts.PixelOperator, GameColour_3.GameColour.text, Align_4.Align.TopLeft);
-            context.drawString("Cost: $" + Functions_1.numberWithPostfix(this.seedCost()), panelRectangle.topLeft().add(new Vector2_7.Vector2(272, 344)), 32, Fonts_3.Fonts.PixelOperator, GameColour_3.GameColour.text, Align_4.Align.TopLeft);
+            context.drawString("成本: $" + Functions_1.numberWithPostfix(this.algorithmCost()), panelRectangle.topLeft().add(new Vector2_7.Vector2(272, 136)), 32, Fonts_3.Fonts.PixelOperator, GameColour_3.GameColour.text, Align_4.Align.TopLeft);
+            context.drawString("成本: $" + Functions_1.numberWithPostfix(this.hashCost()), panelRectangle.topLeft().add(new Vector2_7.Vector2(272, 188)), 32, Fonts_3.Fonts.PixelOperator, GameColour_3.GameColour.text, Align_4.Align.TopLeft);
+            context.drawString("成本: $" + Functions_1.numberWithPostfix(this.cpuCost()), panelRectangle.topLeft().add(new Vector2_7.Vector2(272, 240)), 32, Fonts_3.Fonts.PixelOperator, GameColour_3.GameColour.text, Align_4.Align.TopLeft);
+            context.drawString("成本: $" + Functions_1.numberWithPostfix(this.parallelCost()), panelRectangle.topLeft().add(new Vector2_7.Vector2(272, 292)), 32, Fonts_3.Fonts.PixelOperator, GameColour_3.GameColour.text, Align_4.Align.TopLeft);
+            context.drawString("成本: $" + Functions_1.numberWithPostfix(this.seedCost()), panelRectangle.topLeft().add(new Vector2_7.Vector2(272, 344)), 32, Fonts_3.Fonts.PixelOperator, GameColour_3.GameColour.text, Align_4.Align.TopLeft);
         };
         CryptCoinMinerPanel.prototype.algorithmCost = function () {
             return Math.pow(2, this.resources.cryptCoinMinerAlgorithmLevel - 1);
@@ -1031,7 +1031,7 @@ define("Game/Classes/HackinatorPanel", ["require", "exports", "Boilerplate/Class
     var HackinatorPanel = /** @class */ (function (_super) {
         __extends(HackinatorPanel, _super);
         function HackinatorPanel(images, resources, input) {
-            var _this = _super.call(this, Programs_2.Programs.Hackinator, "Hackinator", images.getImage(ImageNames_3.ImageNames.Hackinator), new Vector2_8.Vector2(400, 200), new Vector2_8.Vector2(480, 526), images) || this;
+            var _this = _super.call(this, Programs_2.Programs.Hackinator, "黑客攻击者", images.getImage(ImageNames_3.ImageNames.Hackinator), new Vector2_8.Vector2(400, 200), new Vector2_8.Vector2(480, 526), images) || this;
             _this.resources = resources;
             _this.input = input;
             _this.isHacking = false;
@@ -1051,27 +1051,27 @@ define("Game/Classes/HackinatorPanel", ["require", "exports", "Boilerplate/Class
             fetch("scripts/Main.js")
                 .then(function (x) { return x.text(); })
                 .then(function (x) { return _this.fullCodeString = _this.formatCodeString(x); });
-            _this.hackingButton = new TextButton_2.TextButton("Start hacking", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 16), new Vector2_8.Vector2(192, 40)), function () {
+            _this.hackingButton = new TextButton_2.TextButton("开始破解", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 16), new Vector2_8.Vector2(192, 40)), function () {
                 _this.isHacking = !_this.isHacking;
-                _this.hackingButton.text = _this.isHacking ? "Stop hacking" : "Start hacking";
+                _this.hackingButton.text = _this.isHacking ? "停止破解" : "开始破解";
             });
-            _this.passwordCrackerButton = new TextButton_2.TextButton("Password cracker", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 254), new Vector2_8.Vector2(240, 40)), function () {
+            _this.passwordCrackerButton = new TextButton_2.TextButton("密码破解", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 254), new Vector2_8.Vector2(240, 40)), function () {
                 _this.resources.money -= _this.passwordCrackerCost();
                 _this.resources.hackinatorPasswordCrackerLevel++;
             }, function () { return _this.resources.money >= _this.passwordCrackerCost(); });
-            _this.sqlInjectionButton = new TextButton_2.TextButton("SQL Injection", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 306), new Vector2_8.Vector2(240, 40)), function () {
+            _this.sqlInjectionButton = new TextButton_2.TextButton("SQL注入", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 306), new Vector2_8.Vector2(240, 40)), function () {
                 _this.resources.money -= _this.sqlInjectionCost();
                 _this.resources.hackinatorSqlInjectionLevel++;
             }, function () { return _this.resources.money >= _this.sqlInjectionCost(); });
-            _this.keyDecryptorButton = new TextButton_2.TextButton("Key Decryptor", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 358), new Vector2_8.Vector2(240, 40)), function () {
+            _this.keyDecryptorButton = new TextButton_2.TextButton("密钥解密器", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 358), new Vector2_8.Vector2(240, 40)), function () {
                 _this.resources.money -= _this.keyDecryptorCost();
                 _this.resources.hackinatorKeyDecryptor++;
             }, function () { return _this.resources.money >= _this.keyDecryptorCost(); });
-            _this.botnetButton = new TextButton_2.TextButton("Botnet", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 410), new Vector2_8.Vector2(240, 40)), function () {
+            _this.botnetButton = new TextButton_2.TextButton("僵尸网络", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 410), new Vector2_8.Vector2(240, 40)), function () {
                 _this.resources.money -= _this.botnetCost();
                 _this.resources.hackinatorBotnetLevel++;
             }, function () { return _this.resources.money >= _this.botnetCost(); });
-            _this.ransomwareButton = new TextButton_2.TextButton("Ransomware", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 462), new Vector2_8.Vector2(240, 40)), function () {
+            _this.ransomwareButton = new TextButton_2.TextButton("勒索软件", new Rectangle_4.Rectangle(new Vector2_8.Vector2(16, 462), new Vector2_8.Vector2(240, 40)), function () {
                 _this.resources.money -= _this.ransomwareCost();
                 _this.resources.hackinatorRansomwareLevel++;
             }, function () { return _this.resources.money >= _this.ransomwareCost(); });
@@ -1106,11 +1106,11 @@ define("Game/Classes/HackinatorPanel", ["require", "exports", "Boilerplate/Class
         HackinatorPanel.prototype.drawPanel = function (context, panelRectangle) {
             this.buttons.forEach(function (x) { return x.draw(context, panelRectangle.topLeft()); });
             context.drawString("$" + Functions_2.numberWithPostfix(this.moneyPerTick() * GameBase_2.GameBase.updatesPerSecond) + "/s", panelRectangle.topLeft().add(new Vector2_8.Vector2(224, 24)), 32, Fonts_4.Fonts.PixelOperator, GameColour_4.GameColour.text, Align_5.Align.TopLeft);
-            context.drawString("Cost: $" + Functions_2.numberWithPostfix(this.passwordCrackerCost()), panelRectangle.topLeft().add(new Vector2_8.Vector2(272, 262)), 32, Fonts_4.Fonts.PixelOperator, GameColour_4.GameColour.text, Align_5.Align.TopLeft);
-            context.drawString("Cost: $" + Functions_2.numberWithPostfix(this.sqlInjectionCost()), panelRectangle.topLeft().add(new Vector2_8.Vector2(272, 314)), 32, Fonts_4.Fonts.PixelOperator, GameColour_4.GameColour.text, Align_5.Align.TopLeft);
-            context.drawString("Cost: $" + Functions_2.numberWithPostfix(this.keyDecryptorCost()), panelRectangle.topLeft().add(new Vector2_8.Vector2(272, 366)), 32, Fonts_4.Fonts.PixelOperator, GameColour_4.GameColour.text, Align_5.Align.TopLeft);
-            context.drawString("Cost: $" + Functions_2.numberWithPostfix(this.botnetCost()), panelRectangle.topLeft().add(new Vector2_8.Vector2(272, 418)), 32, Fonts_4.Fonts.PixelOperator, GameColour_4.GameColour.text, Align_5.Align.TopLeft);
-            context.drawString("Cost: $" + Functions_2.numberWithPostfix(this.ransomwareCost()), panelRectangle.topLeft().add(new Vector2_8.Vector2(272, 470)), 32, Fonts_4.Fonts.PixelOperator, GameColour_4.GameColour.text, Align_5.Align.TopLeft);
+            context.drawString("成本: $" + Functions_2.numberWithPostfix(this.passwordCrackerCost()), panelRectangle.topLeft().add(new Vector2_8.Vector2(272, 262)), 32, Fonts_4.Fonts.PixelOperator, GameColour_4.GameColour.text, Align_5.Align.TopLeft);
+            context.drawString("成本: $" + Functions_2.numberWithPostfix(this.sqlInjectionCost()), panelRectangle.topLeft().add(new Vector2_8.Vector2(272, 314)), 32, Fonts_4.Fonts.PixelOperator, GameColour_4.GameColour.text, Align_5.Align.TopLeft);
+            context.drawString("成本: $" + Functions_2.numberWithPostfix(this.keyDecryptorCost()), panelRectangle.topLeft().add(new Vector2_8.Vector2(272, 366)), 32, Fonts_4.Fonts.PixelOperator, GameColour_4.GameColour.text, Align_5.Align.TopLeft);
+            context.drawString("成本: $" + Functions_2.numberWithPostfix(this.botnetCost()), panelRectangle.topLeft().add(new Vector2_8.Vector2(272, 418)), 32, Fonts_4.Fonts.PixelOperator, GameColour_4.GameColour.text, Align_5.Align.TopLeft);
+            context.drawString("成本: $" + Functions_2.numberWithPostfix(this.ransomwareCost()), panelRectangle.topLeft().add(new Vector2_8.Vector2(272, 470)), 32, Fonts_4.Fonts.PixelOperator, GameColour_4.GameColour.text, Align_5.Align.TopLeft);
             this.rectangles.forEach(function (x) { return context.drawFillRectangle(new Rectangle_4.Rectangle(x.rectangle.position.add(panelRectangle.topLeft()), x.rectangle.size), x.colour); });
             this.drawCodeStringDisplay(context, panelRectangle.topLeft());
         };
@@ -1217,19 +1217,19 @@ define("Game/Classes/ProgramShopPanel", ["require", "exports", "Boilerplate/Clas
     var ProgramShopPanel = /** @class */ (function (_super) {
         __extends(ProgramShopPanel, _super);
         function ProgramShopPanel(images, resources, input) {
-            var _this = _super.call(this, Programs_3.Programs.ProgramShop, "Program Shop", images.getImage(ImageNames_4.ImageNames.ProgramShop), new Vector2_9.Vector2(900, 0), new Vector2_9.Vector2(664, 400), images) || this;
+            var _this = _super.call(this, Programs_3.Programs.ProgramShop, "程序商店", images.getImage(ImageNames_4.ImageNames.ProgramShop), new Vector2_9.Vector2(900, 0), new Vector2_9.Vector2(664, 400), images) || this;
             _this.resources = resources;
             _this.input = input;
             _this.cryptCoinMinerCost = 10;
             _this.hackinatorCost = 100000;
-            _this.purchaseCryptCoinMinerButton = new TextButton_3.TextButton("Purchase", new Rectangle_5.Rectangle(new Vector2_9.Vector2(480, 16), new Vector2_9.Vector2(160, 40)), function () {
+            _this.purchaseCryptCoinMinerButton = new TextButton_3.TextButton("购买", new Rectangle_5.Rectangle(new Vector2_9.Vector2(480, 16), new Vector2_9.Vector2(160, 40)), function () {
                 _this.resources.money -= _this.cryptCoinMinerCost;
                 _this.resources.programCryptCoinMinerUnlocked = true;
-            }, function () { return !_this.resources.programCryptCoinMinerUnlocked && _this.resources.money >= _this.cryptCoinMinerCost; }, function () { return _this.purchaseCryptCoinMinerButton.text = _this.resources.programCryptCoinMinerUnlocked ? "Purchased" : "Purchase"; }, function () { return _this.purchaseCryptCoinMinerButton.text = _this.resources.programCryptCoinMinerUnlocked ? "Purchased" : "Purchase"; });
-            _this.purchaseHackinatorButton = new TextButton_3.TextButton("Purchase", new Rectangle_5.Rectangle(new Vector2_9.Vector2(480, 68), new Vector2_9.Vector2(160, 40)), function () {
+            }, function () { return !_this.resources.programCryptCoinMinerUnlocked && _this.resources.money >= _this.cryptCoinMinerCost; }, function () { return _this.purchaseCryptCoinMinerButton.text = _this.resources.programCryptCoinMinerUnlocked ? "已购买" : "购买"; }, function () { return _this.purchaseCryptCoinMinerButton.text = _this.resources.programCryptCoinMinerUnlocked ? "已购买" : "购买"; });
+            _this.purchaseHackinatorButton = new TextButton_3.TextButton("购买", new Rectangle_5.Rectangle(new Vector2_9.Vector2(480, 68), new Vector2_9.Vector2(160, 40)), function () {
                 _this.resources.money -= _this.hackinatorCost;
                 _this.resources.programHackinatorUnlocked = true;
-            }, function () { return !_this.resources.programHackinatorUnlocked && _this.resources.money >= _this.hackinatorCost; }, function () { return _this.purchaseHackinatorButton.text = _this.resources.programHackinatorUnlocked ? "Purchased" : "Purchase"; }, function () { return _this.purchaseHackinatorButton.text = _this.resources.programHackinatorUnlocked ? "Purchased" : "Purchase"; });
+            }, function () { return !_this.resources.programHackinatorUnlocked && _this.resources.money >= _this.hackinatorCost; }, function () { return _this.purchaseHackinatorButton.text = _this.resources.programHackinatorUnlocked ? "已购买" : "购买"; }, function () { return _this.purchaseHackinatorButton.text = _this.resources.programHackinatorUnlocked ? "已购买" : "购买"; });
             _this.buttons = [
                 _this.purchaseCryptCoinMinerButton,
                 _this.purchaseHackinatorButton,
@@ -1239,10 +1239,10 @@ define("Game/Classes/ProgramShopPanel", ["require", "exports", "Boilerplate/Clas
                 new Picture_1.Picture(images.getImage(ImageNames_4.ImageNames.Hackinator), new Rectangle_5.Rectangle(new Vector2_9.Vector2(16, 76), new Vector2_9.Vector2(32, 32))),
             ];
             _this.text = [
-                new Text_1.Text("CryptCoin Miner", new Vector2_9.Vector2(56, 24), Align_6.Align.TopLeft),
-                new Text_1.Text("Cost: $" + Functions_3.numberWithPostfix(_this.cryptCoinMinerCost), new Vector2_9.Vector2(280, 24), Align_6.Align.TopLeft),
-                new Text_1.Text("Hackinator", new Vector2_9.Vector2(56, 76), Align_6.Align.TopLeft),
-                new Text_1.Text("Cost: $" + Functions_3.numberWithPostfix(_this.hackinatorCost), new Vector2_9.Vector2(280, 76), Align_6.Align.TopLeft),
+                new Text_1.Text("加密币矿工", new Vector2_9.Vector2(56, 24), Align_6.Align.TopLeft),
+                new Text_1.Text("成本: $" + Functions_3.numberWithPostfix(_this.cryptCoinMinerCost), new Vector2_9.Vector2(280, 24), Align_6.Align.TopLeft),
+                new Text_1.Text("黑客攻击者", new Vector2_9.Vector2(56, 76), Align_6.Align.TopLeft),
+                new Text_1.Text("成本: $" + Functions_3.numberWithPostfix(_this.hackinatorCost), new Vector2_9.Vector2(280, 76), Align_6.Align.TopLeft),
             ];
             return _this;
         }
@@ -1266,7 +1266,7 @@ define("Game/Classes/WalletPanel", ["require", "exports", "Boilerplate/Classes/V
     var WalletPanel = /** @class */ (function (_super) {
         __extends(WalletPanel, _super);
         function WalletPanel(images, resources) {
-            var _this = _super.call(this, Programs_4.Programs.Wallet, "Wallet", images.getImage(ImageNames_5.ImageNames.Wallet), Vector2_10.Vector2.zero(), new Vector2_10.Vector2(200, 34), images) || this;
+            var _this = _super.call(this, Programs_4.Programs.Wallet, "钱包", images.getImage(ImageNames_5.ImageNames.Wallet), Vector2_10.Vector2.zero(), new Vector2_10.Vector2(200, 34), images) || this;
             _this.resources = resources;
             return _this;
         }
@@ -1437,7 +1437,7 @@ define("Game/Classes/StartMenu", ["require", "exports", "Boilerplate/Classes/Rec
             context.drawFillRectangle(this.startButtonRect3, GameColour_7.GameColour.greyscale50);
             context.drawFillRectangle(this.startButtonRect4, GameColour_7.GameColour.greyscale87);
             context.drawFillRectangle(this.startButtonRect5, GameColour_7.GameColour.greyscale75);
-            context.drawString("Start", this.startButtonRect5.rightCenter().subtract(this.startTextOffset), 32, Fonts_7.Fonts.PixelOperator, GameColour_7.GameColour.text, Align_8.Align.Right);
+            context.drawString("开始", this.startButtonRect5.rightCenter().subtract(this.startTextOffset), 32, Fonts_7.Fonts.PixelOperator, GameColour_7.GameColour.text, Align_8.Align.Right);
             context.drawImageRectangle(this.startImage, this.startImageRect);
             if (this.startMenuOpen) {
                 context.drawFillRectangle(this.startMenuRectangle1, GameColour_7.GameColour.greyscale0);
@@ -1463,10 +1463,10 @@ define("Game/Classes/StartMenu", ["require", "exports", "Boilerplate/Classes/Rec
         };
         StartMenu.prototype.setupStartMenu = function (images, resources) {
             this.startMenuEntries = [];
-            this.startMenuEntries.push(new StartMenuEntry_1.StartMenuEntry(1, "Wallet", images.getImage(ImageNames_6.ImageNames.Wallet), function () { return true; }, Programs_6.Programs.Wallet));
-            this.startMenuEntries.push(new StartMenuEntry_1.StartMenuEntry(2, "Program Shop", images.getImage(ImageNames_6.ImageNames.ProgramShop), function () { return true; }, Programs_6.Programs.ProgramShop));
-            this.startMenuEntries.push(new StartMenuEntry_1.StartMenuEntry(3, "CryptCoin Miner", images.getImage(ImageNames_6.ImageNames.CryptCoinMiner), function () { return resources.programCryptCoinMinerUnlocked; }, Programs_6.Programs.CryptCoinMiner));
-            this.startMenuEntries.push(new StartMenuEntry_1.StartMenuEntry(4, "Hackinator", images.getImage(ImageNames_6.ImageNames.Hackinator), function () { return resources.programHackinatorUnlocked; }, Programs_6.Programs.Hackinator));
+            this.startMenuEntries.push(new StartMenuEntry_1.StartMenuEntry(1, "钱包", images.getImage(ImageNames_6.ImageNames.Wallet), function () { return true; }, Programs_6.Programs.Wallet));
+            this.startMenuEntries.push(new StartMenuEntry_1.StartMenuEntry(2, "程序商店", images.getImage(ImageNames_6.ImageNames.ProgramShop), function () { return true; }, Programs_6.Programs.ProgramShop));
+            this.startMenuEntries.push(new StartMenuEntry_1.StartMenuEntry(3, "加密币矿工", images.getImage(ImageNames_6.ImageNames.CryptCoinMiner), function () { return resources.programCryptCoinMinerUnlocked; }, Programs_6.Programs.CryptCoinMiner));
+            this.startMenuEntries.push(new StartMenuEntry_1.StartMenuEntry(4, "黑客攻击者", images.getImage(ImageNames_6.ImageNames.Hackinator), function () { return resources.programHackinatorUnlocked; }, Programs_6.Programs.Hackinator));
         };
         StartMenu.prototype.getInstalledPrograms = function () {
             return this.startMenuEntries.filter(function (x) { return x.installed(); });
