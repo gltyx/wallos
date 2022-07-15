@@ -38,8 +38,8 @@ export class ProgramShopPanel extends Panel {
                 this.resources.programCryptCoinMinerUnlocked = true;
             },
             () => !this.resources.programCryptCoinMinerUnlocked && this.resources.money >= this.cryptCoinMinerCost,
-            () => this.purchaseCryptCoinMinerButton.text = this.resources.programCryptCoinMinerUnlocked ? "Purchased" : "Purchase",
-            () => this.purchaseCryptCoinMinerButton.text = this.resources.programCryptCoinMinerUnlocked ? "Purchased" : "Purchase");
+            () => this.purchaseCryptCoinMinerButton.text = this.resources.programCryptCoinMinerUnlocked ? "已购买" : "购买",
+            () => this.purchaseCryptCoinMinerButton.text = this.resources.programCryptCoinMinerUnlocked ? "已购买" : "购买");
 
         this.purchaseHackinatorButton = new TextButton("Purchase", new Rectangle(new Vector2(480, 68), new Vector2(160, 40)),
             () => {
@@ -47,8 +47,8 @@ export class ProgramShopPanel extends Panel {
                 this.resources.programHackinatorUnlocked = true;
             },
             () => !this.resources.programHackinatorUnlocked && this.resources.money >= this.hackinatorCost,
-            () => this.purchaseHackinatorButton.text = this.resources.programHackinatorUnlocked ? "Purchased" : "Purchase",
-            () => this.purchaseHackinatorButton.text = this.resources.programHackinatorUnlocked ? "Purchased" : "Purchase");
+            () => this.purchaseHackinatorButton.text = this.resources.programHackinatorUnlocked ? "已购买" : "购买",
+            () => this.purchaseHackinatorButton.text = this.resources.programHackinatorUnlocked ? "已购买" : "购买");
 
         this.purchaseAutoStonksButton = new TextButton("Purchase", new Rectangle(new Vector2(480, 120), new Vector2(160, 40)),
             () => {
@@ -56,8 +56,8 @@ export class ProgramShopPanel extends Panel {
                 this.resources.programAutoStonksUnlocked = true;
             },
             () => !this.resources.programAutoStonksUnlocked && this.resources.money >= this.autoStonksCost,
-            () => this.purchaseAutoStonksButton.text = this.resources.programAutoStonksUnlocked ? "Purchased" : "Purchase",
-            () => this.purchaseAutoStonksButton.text = this.resources.programAutoStonksUnlocked ? "Purchased" : "Purchase");
+            () => this.purchaseAutoStonksButton.text = this.resources.programAutoStonksUnlocked ? "已购买" : "购买",
+            () => this.purchaseAutoStonksButton.text = this.resources.programAutoStonksUnlocked ? "已购买" : "购买");
 
         this.buttons = [
             this.purchaseCryptCoinMinerButton,
