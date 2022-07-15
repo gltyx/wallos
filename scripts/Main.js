@@ -918,7 +918,7 @@ define("Game/Classes/AutoStonksPanel", ["require", "exports", "Boilerplate/Modul
     var AutoStonksPanel = /** @class */ (function (_super) {
         __extends(AutoStonksPanel, _super);
         function AutoStonksPanel(images, resources, input) {
-            var _this = _super.call(this, Programs_1.Programs.AutoStonks, "AutoStonks", images.getImage(ImageNames_2.ImageNames.AutoStonks), new Vector2_7.Vector2(400, 200), new Vector2_7.Vector2(480, 526), images) || this;
+            var _this = _super.call(this, Programs_1.Programs.AutoStonks, "自动炒股", images.getImage(ImageNames_2.ImageNames.AutoStonks), new Vector2_7.Vector2(400, 200), new Vector2_7.Vector2(480, 526), images) || this;
             _this.resources = resources;
             _this.input = input;
             _this.isTrading = false;
@@ -1083,7 +1083,7 @@ define("Game/Classes/CryptCoinMinerPanel", ["require", "exports", "Boilerplate/C
     var CryptCoinMinerPanel = /** @class */ (function (_super) {
         __extends(CryptCoinMinerPanel, _super);
         function CryptCoinMinerPanel(images, resources, input) {
-            var _this = _super.call(this, Programs_2.Programs.CryptCoinMiner, "CryptCoin Miner", images.getImage(ImageNames_3.ImageNames.CryptCoinMiner), new Vector2_8.Vector2(400, 0), new Vector2_8.Vector2(480, 400), images) || this;
+            var _this = _super.call(this, Programs_2.Programs.CryptCoinMiner, "加密币矿工", images.getImage(ImageNames_3.ImageNames.CryptCoinMiner), new Vector2_8.Vector2(400, 0), new Vector2_8.Vector2(480, 400), images) || this;
             _this.resources = resources;
             _this.input = input;
             _this.isMining = false;
@@ -1204,7 +1204,7 @@ define("Game/Classes/HackinatorPanel", ["require", "exports", "Boilerplate/Class
     var HackinatorPanel = /** @class */ (function (_super) {
         __extends(HackinatorPanel, _super);
         function HackinatorPanel(images, resources, input) {
-            var _this = _super.call(this, Programs_3.Programs.Hackinator, "Hackinator", images.getImage(ImageNames_4.ImageNames.Hackinator), new Vector2_9.Vector2(400, 200), new Vector2_9.Vector2(480, 526), images) || this;
+            var _this = _super.call(this, Programs_3.Programs.Hackinator, "黑客攻击者", images.getImage(ImageNames_4.ImageNames.Hackinator), new Vector2_9.Vector2(400, 200), new Vector2_9.Vector2(480, 526), images) || this;
             _this.resources = resources;
             _this.input = input;
             _this.isHacking = false;
